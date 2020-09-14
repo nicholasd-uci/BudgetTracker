@@ -1,5 +1,6 @@
 // this file creates the object for the DB
 let db
+// the 1 has ?may have something to do with the V of the DB
 const request = indexedDb.open('budget', 1)
 
 request.onupgradeneeded = event => {
