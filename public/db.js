@@ -1,7 +1,7 @@
 // this file creates the object for the DB
 let db
 // the 1 has ?may have something to do with the V of the DB
-const request = indexedDb.open('budget', 1)
+const request = indexedDB.open('budget', 1)
 
 request.onupgradeneeded = event => {
     db = event.target.result
@@ -22,14 +22,14 @@ request.onerror = event => {
 
 const saveRecord = item => {
     const transaction = db.transaction(['pending'], 'readwrite')
-    const store = transaction.createObjectStore('pending')
+    const store = transaction.objectStore('pending')
     store.add(item)
 }
 
 const checkDatabase = () => {
     console.log('checking database')
     const transaction = db.transaction(['pending'], 'readwrite')
-    const store = transaction.createObjectStore('pending')
+    const store = transaction.objectStore('pending')
     const getAll = store.getAll()
 
 getAll.onsuccess = () => {
