@@ -32,19 +32,19 @@ const checkDatabase = () => {
     const store = transaction.createObjectStore('pending')
     const getAll = store.getAll()
 
-getAll.onSuccess = () => {
+getAll.onsuccess = () => {
     if (getAll.result.length > 0) {
         fetch('/api/transaction/bulk', {
             method: 'POST',
             headers: {
                 'content-Type': 'application/json',
-                Authorization: `Bearer ${local.storage.getItem('user')}`
+                // Authorization: `Bearer ${local.storage.getItem('user')}`
             },
             body: JSON.stringify(getAll.result)
             })
             .then(() => {
                 const transaction = db.transaction(['pending'], 'readwrite')
-                const store = transaction.createObjectStore('pending')
+                const store = transaction.objectStore('pending')
                 store.clear()
             })
         }
